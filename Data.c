@@ -24,4 +24,12 @@ void mostra_data( Data *p ){
 	printf("%d/%d/%d\n", p->dia, p->mes, p->ano );
 }
 
-
+int compara_data( Data *data1, Data *data2){
+	if(data1->ano != data2->ano){
+		return data1->ano - data2->ano;
+	}
+	if(data1 -> mes != data2 -> mes){
+		return data1->mes - data2->mes;
+	}
+	return data1->dia - data2->dia;
+}

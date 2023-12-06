@@ -4,4 +4,4 @@ typedef struct{
 
 void le_data( Data *p );
 void mostra_data( Data *p );
-
+int compara_data( Data *data1, Data *data2);

@@ -2,7 +2,6 @@
 #include <stdio.h>
 
 void le_horario( Horario *p ){
-	
 	printf("Digite a hora: ");
 	scanf("%d", &p->hora);
 	while( p->hora > 23 || p->hora < 0 ){
@@ -22,9 +21,21 @@ void mostra_hora( Horario *p ){
 	printf("%d:%d\n", p->hora, p->minuto);
 }
 
-// int conflito_hora(Horario inicio1, Horario final1, Horario inicio2, Horario final2){
-//     if (inicio1.hora == inicio2.hora){
-//         if (){
-//         }
-//     }
-// }
+int compara_hora(Horario *hora1, Horario *hora2){
+	if(hora1->hora != hora2->hora){
+		return hora1->hora - hora2->hora;
+	}
+	return hora1->minuto - hora2->minuto;
+	//compara_hora < 0 -> hora1 vem primeiro
+	//compara_hora = 0 -> hora1 e hora2 são iguais
+	//compara_hora = 0 -> hora2 vem primeiro
+	}
+
+int valida_hora(Horario *inicio, Horario *final){
+	if (inicio->hora >= final->hora){
+        if (inicio->minuto > final->minuto){
+            return 0;
+        }
+        return 1;
+    }
+}

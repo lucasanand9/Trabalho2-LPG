@@ -13,3 +13,4 @@ typedef struct{
 void le_evento(Evento *p);
 void mostra_evento(Evento *p);
 void busca_evento_data(Evento p[], int tam, Data a);
+int verifica_data_hora(Evento *evento1, Evento *evento2);

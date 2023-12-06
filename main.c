@@ -36,7 +36,7 @@ int main(int argc, char *argv[]) {
             case 1://Cadastro
                 n++;
                 v = realloc( v, sizeof(Evento) * n );
-                le_produto( &v[n-1] );
+                le_produto( &v[n-1] );//colocar em uma variavel antes para n precisar usar o realloc caso de errado
                 break;
                 
             case 2://Mostrar todos os eventos da agenda
