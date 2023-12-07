@@ -4,7 +4,6 @@
 #include <stdio.h>
 
 void le_evento(Evento *p){
-    
     printf("Digite a data do evento:\n");
     le_data(&p->data);
     printf("O horario final vem primeiro que o horario inicial, coloque um horario valido:\n");
@@ -25,6 +24,7 @@ void le_evento(Evento *p){
     printf("Digite um local:\n");
     scanf(" %s", p->local);
 }
+
 void mostra_evento(Evento *p){  
     printf("Data do evento: ");
     mostra_data(&p->data);
@@ -35,6 +35,7 @@ void mostra_evento(Evento *p){
     printf("Descricao: %s", p->descricao);
     printf("Local %s", p->local);
 }
+
 void busca_evento_data(Evento p[], int tam, Data a){
     for (int i = 0; i < tam; i++){
         if (a.ano == (p[i]).data.ano && a.mes == (p[i]).data.mes && a.dia == (p[i]).data.dia ){
@@ -42,6 +43,7 @@ void busca_evento_data(Evento p[], int tam, Data a){
         }
     }
 }
+
 void busca_descricao(Evento v[],char *descricaobusca, int n){
     for(int i = 0 ; i < n ; i++ ){
         if(strcmp(v[i],descricaobusca) == 0){
@@ -67,4 +69,25 @@ int verifica_data_hora(Evento *evento1, Evento *evento2){
         
     }
 //printf("Não é possível inserir esse evento nesse horário.");
+}
+
+void sortEventos(Evento listaEventos[], int tam){
+    Evento aux;
+    for (int i = 0; i < tam; i++){
+        int indiceMenor = i;
+    
+        for (int j = i+1; j < tam; j++){
+            if (compara_data(&(listaEventos[indiceMenor]).data, &(listaEventos[j]).data ) > 0){
+                indiceMenor = j;
+            }else if (compara_data(&(listaEventos[indiceMenor]).data, &(listaEventos[j]).data ) == 0){
+                if (compara_hora(&(listaEventos[indiceMenor]).inicio, &(listaEventos[j]).inicio)){
+                    indiceMenor = j;
+                }
+            }
+        }
+
+        aux = listaEventos[i];
+        listaEventos[i] = listaEventos[indiceMenor];
+        listaEventos[indiceMenor] = aux;
+    }
 }
