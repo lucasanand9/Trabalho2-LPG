@@ -21,7 +21,7 @@ void le_data( Data *p ){
 }
 
 void mostra_data( Data *p ){
-	printf("%d/%d/%d\n", p->dia, p->mes, p->ano );
+	printf("%.2d/%.2d/%.4d\n", p->dia, p->mes, p->ano );
 }
 
 int compara_data( Data *data1, Data *data2){
