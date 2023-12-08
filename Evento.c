@@ -37,20 +37,33 @@ void mostra_evento(Evento *p){
 }
 
 void busca_evento_data(Evento p[], int tam, Data a){
+    int existe = 0;
     for (int i = 0; i < tam; i++){
         if (a.ano == (p[i]).data.ano && a.mes == (p[i]).data.mes && a.dia == (p[i]).data.dia ){
             mostra_evento(&p[i]);
+            existe = 1;
         }
     }
+    if (existe){
+        printf("Não existe nenhum evento nessa data\n");
+    }
+    
 }
 
 void busca_descricao(Evento v[],char *descricaobusca, int n){
+    int existe = 0;
     for(int i = 0 ; i < n ; i++ ){
         if(strcmp(v[i],descricaobusca) == 0){
             printf("Evento encontrado:\n");
             printf("Descrição: %s\n", v[i].descricao);
+            existe = 1;
         }
     }
+    if (existe){
+        printf("Não existe evento com essa mesma descrição\n");
+    }
+    
+    
 }
 int busca_sequencial(Evento v[], int n, Data a, Horario inicial){
     for(int i = 0; i < n; i ++){
@@ -90,4 +103,29 @@ void sortEventos(Evento listaEventos[], int tam){
         listaEventos[i] = listaEventos[indiceMenor];
         listaEventos[indiceMenor] = aux;
     }
+}
+int compEvento(Evento *a, Evento *b){
+    if (compara_data(&(a)->data, &(b)->data) == 0){
+        if (compara_hora(&(a)->inicio, &(b)->fim)<0){
+            if (compara_hora(&(a)->fim, &(b)->inicio)<0){
+                return 0; //é valido
+            }else{
+                return 1;//n é valido
+            }
+            }else{
+                return 0;// é valido
+            } 
+    }else{
+        return 0;//é valido
+    }
+    
+}
+
+int comparaTodosEventos(Evento v[],int tam ,Evento *a){
+    for (int i = 0; i < tam; i++){
+        if (compEvento(&(v[i]), &(a))){
+            return 0;
+        }
+    }
+    return 1;
 }

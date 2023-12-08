@@ -34,9 +34,18 @@ int main(int argc, char *argv[]) {
         scanf("%d", &opcao);
         switch( opcao ){
             case 1://Cadastro
+                Evento novoEvento;
+                le_evento(&novoEvento);
+                if (comparaTodosEventos(v,n,&novoEvento)){
+                 printf("Evento não esta entrando em conflito com outros eventos\n");
+                 break;
+                }
                 n++;
                 v = realloc( v, sizeof(Evento) * n );
-                le_produto( &v[n-1] );//colocar em uma variavel antes para n precisar usar o realloc caso de errado
+                v[n-1] = novoEvento;
+                sortEventos(v, n);
+                printf("Evento adicionado com sucesso\n");
+        		system("pause");
                 break;
                 
             case 2://Mostrar todos os eventos da agenda
@@ -55,12 +64,9 @@ int main(int argc, char *argv[]) {
                 if( n == 0 )
                     printf("Cadastro vazio!\n");
                 else{ //ARRUMAR
-                    int dia,mes,ano;
-                    printf("Digite um dia:\n");
-                    printf("Digite um mês:\n");
-                    printf("Digite um ano:\n");
-                    scanf("%s",descricaobusca);
-                    busca_evento_data(Evento &p[], tam, Data a);
+                    Data novaData;
+                    le_data(&novaData);
+                    busca_evento_data(v, n, novaData);
                 }
                 system("pause");
                 break;
@@ -71,13 +77,13 @@ int main(int argc, char *argv[]) {
                 else{
                     char descricaobusca[200];
                     printf("Digite uma descrição:\n");
-                    scanf("%s",descricaobusca);
-                    busca_descricao(Evento &v[],*descricaobusca,n);
+                    scanf("%[^\n]", descricaobusca);
+                    busca_descricao(v,descricaobusca,n);
                 }
                 system("pause");
                 break;
 
-            case 5: //Remover Evento
+            case 5: //Remover Evento falta fazer
                 if( n == 0 )
                     printf("Cadastro vazio!\n");
                 else{
